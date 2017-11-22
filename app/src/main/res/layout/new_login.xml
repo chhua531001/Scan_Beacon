@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--要讓EditText不要一開始就focus, 就在Layout上使用以下的設定-->
+<!--android:focusableInTouchMode="true"-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    android:focusableInTouchMode="true"
+    android:weightSum="10">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
+    <ImageView
+        android:id="@+id/circleImageView3"
+        android:layout_width="500px"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/loginUser"
+        android:layout_width="550px"
+        android:layout_height="0dp"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:background="@drawable/white_rounded"
+        android:ems="10"
+        android:hint="帳號"
+        android:textSize="50px"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:textColorHint="@color/purple"
+        android:layout_gravity="center"
+        android:textColor="@color/purple"/>
+
+
+
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_width="550px"
+        android:layout_height="0dp"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:background="@drawable/white_rounded"
+        android:ems="10"
+        android:hint="密碼"
+        android:layout_weight="1"
+        android:inputType="textPassword"
+        android:textColor="@color/purple"
+        android:textColorHint="@color/purple"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:layout_gravity="center"
+        android:textSize="50px"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="550px"
+        android:layout_height="0dp"
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:background="@drawable/purple_rounded_white_border"
+        android:text="登入"
+        android:layout_weight="1"
+
+        android:onClick="loginClick"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="50px"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:weightSum="7">
+
+
+        <!--不需要EditText的buttom line用android:background="@android:color/transparent"即可-->
+        <!--不需要EditText的buttom line用android:background="@null"即可-->
+        <!--android:textCursorDrawable="@null"是讓cursor的顏色與輸入字型的顏色一致-->
+        <!--利用自訂的android:textCursorDrawable="@drawable/cursor_color"可以改變cursor的寬度與選色-->
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="80px"
+            android:layout_weight="1"
+            android:background="@color/purple"/>
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/infoButton1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="80px"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/icon_i_42"-->
+            <!--android:onClick="forgotPasswordClick" />-->
+
+        <!--create a circular imageButton-->
+        <ImageButton
+            android:id="@+id/infoButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/info_circle_icon"
+            android:background="@null"
+            android:onClick="forgotPasswordClick" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="80px"
+            android:layout_weight="1"
+            android:background="@color/purple"/>
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/infoButton2"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="80px"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/icon_facebook_42"-->
+            <!--android:onClick="forgotPasswordClick" />-->
+
+        <!--create a circular imageButton-->
+        <ImageButton
+            android:id="@+id/infoButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/facebook_circle_icon"
+            android:background="@null"
+            android:onClick="forgotPasswordClick" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="80px"
+            android:layout_weight="1"
+            android:background="@color/purple"/>
+        <!--<ImageButton-->
+            <!--android:id="@+id/infoButton3"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="80px"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/icon_g_42"-->
+            <!--android:onClick="forgotPasswordClick" />-->
+
+        <!--create a circular imageButton-->
+        <ImageButton
+            android:id="@+id/infoButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/google_circle_icon"
+            android:background="@null"
+            android:onClick="forgotPasswordClick" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="80px"
+            android:layout_weight="1"
+            android:background="@color/purple"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+</LinearLayout>

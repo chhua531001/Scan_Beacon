@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chhua.scan_beacon.MainActivity"
+    android:background="@android:color/transparent"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/top_cl"
+        android:layout_width="0dp"
+        android:layout_height="100px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <LinearLayout
+            android:id="@+id/top_ll"
+            android:layout_width="0dp"
+            android:layout_height="100px"
+            android:orientation="horizontal"
+            android:background="@color/purple"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1">
+
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/textClock"-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/messageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    android:background="@android:color/transparent"
+                    android:paddingTop="3px"
+                    android:paddingBottom="3px"
+                    android:onClick="messageClick"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_btn_1" />
+
+                <TextView
+                    android:id="@+id/messageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="訊息"
+                    android:textSize="27px"
+                    android:onClick="messageClick"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/inquireButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    android:background="@android:color/transparent"
+                    android:onClick="inquireClick"
+                    android:paddingTop="3px"
+                    android:paddingBottom="3px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_btn_2" />
+
+                <TextView
+                    android:id="@+id/inquireText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="查詢"
+                    android:textSize="27px"
+                    android:onClick="inquireClick"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/toolsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    android:background="@android:color/transparent"
+                    android:onClick="toolsClick"
+                    android:paddingTop="3px"
+                    android:paddingBottom="3px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_btn_3" />
+
+                <TextView
+                    android:id="@+id/toolsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="工具"
+                    android:textSize="27px"
+                    android:onClick="settingClick"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/settingButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    android:background="@android:color/transparent"
+                    android:onClick="settingClick"
+                    android:paddingTop="3px"
+                    android:paddingBottom="3px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_btn_4" />
+
+                <TextView
+                    android:id="@+id/settingText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="設定"
+                    android:textSize="27px"
+                    android:onClick="settingClick"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--android:background="@android:color/transparent"-->
+
+
+</android.support.constraint.ConstraintLayout>

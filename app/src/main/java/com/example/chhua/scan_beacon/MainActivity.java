@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     Pair<Integer, Integer> tempPixels;
     int hPixels;
 
+    View tempView;
+
 
     private GridView gridView;
     private int[] image = {
@@ -669,7 +671,9 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                     break;
                 case 2:
                     initInquirePage();
-
+                    break;
+                case 3:
+                    initToolsPage();
                     break;
             }
         }
@@ -2025,6 +2029,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     public void initToolsPage() {
 
         setContentView(R.layout.tools_page);
+        tempView = this.findViewById(android.R.id.content);
 
         android.view.ViewGroup.MarginLayoutParams mParams;
 
@@ -2054,8 +2059,17 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), "Your choice is " + imgText[position],
                         Toast.LENGTH_SHORT).show();
+
+                switch(position) {
+                    case 0:
+                        inquireClick(tempView);
+                        break;
+
+                }
             }
         });
+
+
 
     }
 

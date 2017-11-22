@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    tools:context=".LoginActivity">
+
+    <!--要讓EditText不要一開始就focus, 就在Layout上使用以下的兩項設定-->
+    <!--android:focusableInTouchMode="true"-->
+    <!--android:layout_marginRight="8dp"-->
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16px"
+        android:layout_marginEnd="16px"
+        android:layout_marginLeft="16px"
+        android:layout_marginRight="16px"
+        android:layout_marginStart="16px"
+        android:layout_marginTop="100px"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <ImageView
+                android:id="@+id/circleImageView3"
+                android:layout_width="500px"
+                android:layout_height="500px"
+                android:layout_marginTop="80px"
+                android:src="@drawable/logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.501" />
+
+            <!--app:civ_border_color="#55aca8a8"-->
+            <!--app:civ_border_width="2dp"-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView5"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="60dp"-->
+                <!--android:text="柬埔寨首都國際學校"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="40sp"-->
+                <!--android:textStyle="bold|italic"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/circleImageView3" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView6"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:text="購物巧手"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="40sp"-->
+                <!--android:textStyle="bold|italic"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/circleImageView3" />-->
+
+            <!--不需要EditText的buttom line用android:background="@android:color/transparent"即可-->
+            <!--android:textCursorDrawable="@null"是讓cursor的顏色與輸入字型的顏色一致-->
+            <!--利用自訂的android:textCursorDrawable="@drawable/cursor_color"可以改變cursor的寬度與選色-->
+            <EditText
+                android:id="@+id/loginUser"
+                android:layout_width="550px"
+                android:layout_height="80px"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="80px"
+                android:background="@drawable/white_rounded"
+                android:ems="10"
+                android:hint="帳號"
+                android:textSize="50px"
+                android:inputType="textPersonName"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHint="@color/purple"
+                android:textColor="@color/purple"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circleImageView3" />
+
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="550px"
+                android:layout_height="80px"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="24px"
+                android:background="@drawable/white_rounded"
+                android:ems="10"
+                android:hint="密碼"
+                android:inputType="textPassword"
+                android:textColor="@color/purple"
+                android:textColorHint="@color/purple"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="50px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginUser" />
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/linearLayout2"-->
+                <!--android:layout_width="350dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:background="@drawable/white_rounded"-->
+                <!--android:orientation="horizontal"-->
+                <!--app:layout_constraintHorizontal_bias="0.5"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/loginUser">-->
+
+                <!--&lt;!&ndash;不需要EditText的buttom line用android:background="@android:color/transparent"即可&ndash;&gt;-->
+                <!--&lt;!&ndash;不需要EditText的buttom line用android:background="@null"即可&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textCursorDrawable="@null"是讓cursor的顏色與輸入字型的顏色一致&ndash;&gt;-->
+                <!--&lt;!&ndash;利用自訂的android:textCursorDrawable="@drawable/cursor_color"可以改變cursor的寬度與選色&ndash;&gt;-->
+                <!--<EditText-->
+                    <!--android:id="@+id/loginPassword"-->
+                    <!--android:layout_width="280dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:background="@color/transparent"-->
+                    <!--android:ems="10"-->
+                    <!--android:hint="密碼"-->
+                    <!--android:textSize="25dp"-->
+                    <!--android:inputType="textPassword"-->
+                    <!--android:textCursorDrawable="@drawable/cursor_color"-->
+                    <!--android:textColorHint="@color/purple"-->
+                    <!--android:textColor="@color/purple" />-->
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/infoButton"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:background="@drawable/info_42"-->
+                    <!--android:onClick="forgotPasswordClick" />-->
+            <!--</LinearLayout>-->
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="550px"
+                android:layout_height="80px"
+                android:layout_marginEnd="16px"
+                android:layout_marginLeft="16px"
+                android:layout_marginRight="16px"
+                android:layout_marginStart="16px"
+                android:layout_marginTop="40px"
+                android:background="@drawable/white_rounded"
+                android:text="登入"
+                android:onClick="loginClick"
+                android:textColor="@color/purple"
+                android:textSize="50px"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="432px"
+                android:layout_height="80px"
+                android:layout_marginEnd="16px"
+                android:layout_marginLeft="16px"
+                android:layout_marginRight="16px"
+                android:layout_marginStart="16px"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="32dp">
+
+                <!--不需要EditText的buttom line用android:background="@android:color/transparent"即可-->
+                <!--不需要EditText的buttom line用android:background="@null"即可-->
+                <!--android:textCursorDrawable="@null"是讓cursor的顏色與輸入字型的顏色一致-->
+                <!--利用自訂的android:textCursorDrawable="@drawable/cursor_color"可以改變cursor的寬度與選色-->
+
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/infoButton1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="80px"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/icon_i_42"-->
+                    <!--android:onClick="forgotPasswordClick" />-->
+
+                <ImageButton
+                    android:id="@+id/infoButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/info_circle_icon"
+                    android:background="@null"
+                    android:onClick="forgotPasswordClick" />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="80px"
+                    android:layout_weight="1"
+                    android:background="@color/purple"/>
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/infoButton2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="80px"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/icon_facebook_42"-->
+                    <!--android:onClick="forgotPasswordClick" />-->
+
+                <ImageButton
+                    android:id="@+id/infoButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/facebook_circle_icon"
+                    android:background="@null"
+                    android:onClick="forgotPasswordClick" />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="80px"
+                    android:layout_weight="1"
+                    android:background="@color/purple"/>
+                <!--<ImageButton-->
+                    <!--android:id="@+id/infoButton3"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="80px"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/icon_g_42"-->
+                    <!--android:onClick="forgotPasswordClick" />-->
+
+                <ImageButton
+                    android:id="@+id/infoButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/google_circle_icon"
+                    android:background="@null"
+                    android:onClick="forgotPasswordClick" />
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
