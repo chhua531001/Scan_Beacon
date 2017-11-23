@@ -68,6 +68,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -707,19 +709,61 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         alert1.show();
         Log.println(Log.INFO, targetID, "System onPause1");
         mScannerView.stopCamera();
-        Log.println(Log.INFO, targetID, "System onPause2");
+//        Log.println(Log.INFO, targetID, "System onPause2");
 
-        mScannerView.stopCamera();
-        mScannerView = null;
+//        mScannerView.stopCamera();
+//        mScannerView = null;
 
-        if(rawResult.getText().toString().contains("http")) {
-
+        String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
+        Pattern p = Pattern.compile(URL_REGEX);
+        Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
+        if(m.find()) {
+            System.out.println("String contains URL");
             doWebView(rawResult.getText().toString());
         }
         else {
-            tools.toastNow(mContext, "QR-Code的資料不是正確的網址", Color.WHITE);
-            setContentView(R.layout.activity_main);  // and set the View again.
+
+            boolean errorCode = true;
+//            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
+            if(rawResult.getText().toString().length() < 21) {
+                URL_REGEX = "^[a-z0-9-]";
+                p = Pattern.compile(URL_REGEX);
+                m = p.matcher(rawResult.getText().toString());//replace with string to compare
+                if (m.find()) {
+                    System.out.println("String contains Barcode");
+                    String pdUrl = "http://vorder.net/demo/cq.php?pb="+rawResult.getText().toString();
+                    doWebView(pdUrl);
+                    errorCode = false;
+                }
+            }
+
+            if(errorCode) {
+                tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
+                mScannerView.setAutoFocus(true);
+                mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+                mScannerView.startCamera();
+            }
         }
+
+
+
+
+//        if(rawResult.getText().toString().contains("https://vorder.net/")) {
+//
+////            mScannerView.stopCamera();
+//            mScannerView = null;
+//            doWebView(rawResult.getText().toString());
+//
+//        }
+//        else {
+//            tools.toastNow(mContext, "QR-Code的資料不是正確的網址", Color.WHITE);
+////            setContentView(R.layout.activity_main);  // and set the View again.
+//
+//
+//            mScannerView.setAutoFocus(true);
+//            mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+//            mScannerView.startCamera();         // Start camera
+//        }
 
 //        //If you would like to resume scanning, call this method below:
 //        mScannerView.resumeCameraPreview(this);
