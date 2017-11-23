@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     View tempView;
 
+//    String [] barCodeArray = {"4710088471444"};
+
 
     private GridView gridView;
     private int[] image = {
@@ -513,6 +515,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
             Log.println(Log.DEBUG, targetID, "pageStack = "+pageStack.toString());
         }
+        else if(currentPage == 2 && (subFunction == 1 || subFunction == 2) ) {
+            mScannerView.setAutoFocus(true);
+            mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+            mScannerView.startCamera();
+        }
     }
 
     @Override
@@ -726,15 +733,29 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             boolean errorCode = true;
 //            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
             if(rawResult.getText().toString().length() < 21) {
+//                for(String barCode : barCodeArray) {
+//                    if(barCode.equals(rawResult.getText().toString())) {
+//                        URL_REGEX = "^[A-Za-z0-9-]";
+//                        p = Pattern.compile(URL_REGEX);
+//                        m = p.matcher(rawResult.getText().toString());//replace with string to compare
+//                        if (m.find()) {
+//                            System.out.println("String contains Barcode");
+//                            String pdUrl = "http://vorder.net/demo/cq.php?pb="+rawResult.getText().toString();
+//                            doWebView(pdUrl);
+//                            errorCode = false;
+//                        }
+//                    }
+//                }
                 URL_REGEX = "^[A-Za-z0-9-]";
                 p = Pattern.compile(URL_REGEX);
                 m = p.matcher(rawResult.getText().toString());//replace with string to compare
                 if (m.find()) {
                     System.out.println("String contains Barcode");
-                    String pdUrl = "http://vorder.net/demo/cq.php?pb="+rawResult.getText().toString();
+                    String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
                     doWebView(pdUrl);
                     errorCode = false;
                 }
+
             }
 
             if(errorCode) {
