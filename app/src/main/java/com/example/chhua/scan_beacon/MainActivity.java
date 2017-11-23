@@ -726,7 +726,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             boolean errorCode = true;
 //            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
             if(rawResult.getText().toString().length() < 21) {
-                URL_REGEX = "^[a-z0-9-]";
+                URL_REGEX = "^[A-Za-z0-9-]";
                 p = Pattern.compile(URL_REGEX);
                 m = p.matcher(rawResult.getText().toString());//replace with string to compare
                 if (m.find()) {
