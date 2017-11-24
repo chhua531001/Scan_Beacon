@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             "cat", "flower", "hippo", "monkey", "mushroom", "panda", "rabbit", "raccoon"
     };
 
+    boolean doPriceSearch = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -356,7 +358,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             // 需要背景作的事
 
             if (timerOn) {
-                Log.println(Log.INFO, targetID, "Count Timer");
+                Log.println(Log.INFO, targetID, "BLE Count Timer");
                 mHandler.postDelayed(rescanRunnable, RESCAN_PERIOD);
                 scanLeDevice(true);
             }
@@ -721,18 +723,18 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //        mScannerView.stopCamera();
 //        mScannerView = null;
 
-        String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
-        Pattern p = Pattern.compile(URL_REGEX);
-        Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
-        if(m.find()) {
-            System.out.println("String contains URL");
-            doWebView(rawResult.getText().toString());
-        }
-        else {
+        if(!doPriceSearch) {
+            String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
+            Pattern p = Pattern.compile(URL_REGEX);
+            Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
+            if (m.find()) {
+                System.out.println("String contains URL");
+                doWebView(rawResult.getText().toString());
+            } else {
 
-            boolean errorCode = true;
+                boolean errorCode = true;
 //            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
-            if(rawResult.getText().toString().length() < 21) {
+                if (rawResult.getText().toString().length() < 21) {
 //                for(String barCode : barCodeArray) {
 //                    if(barCode.equals(rawResult.getText().toString())) {
 //                        URL_REGEX = "^[A-Za-z0-9-]";
@@ -746,26 +748,31 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //                        }
 //                    }
 //                }
-                URL_REGEX = "^[A-Za-z0-9-]";
-                p = Pattern.compile(URL_REGEX);
-                m = p.matcher(rawResult.getText().toString());//replace with string to compare
-                if (m.find()) {
-                    System.out.println("String contains Barcode");
-                    String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
-                    doWebView(pdUrl);
-                    errorCode = false;
+                    URL_REGEX = "^[A-Za-z0-9-]";
+                    p = Pattern.compile(URL_REGEX);
+                    m = p.matcher(rawResult.getText().toString());//replace with string to compare
+                    if (m.find()) {
+                        System.out.println("String contains Barcode");
+                        String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
+                        doWebView(pdUrl);
+                        errorCode = false;
+                    }
+
                 }
 
-            }
-
-            if(errorCode) {
-                tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
-                mScannerView.setAutoFocus(true);
-                mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-                mScannerView.startCamera();
+                if (errorCode) {
+                    tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
+                    mScannerView.setAutoFocus(true);
+                    mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+                    mScannerView.startCamera();
+                }
             }
         }
-
+        else {
+            mScannerView.setAutoFocus(true);
+            mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+            mScannerView.startCamera();
+        }
 
 
 
@@ -795,6 +802,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     public void messageClick(View v) {
         Log.println(Log.INFO, targetID, "Message Button Click");
 
+//        initMessagePage();
         if(currentPage != 1) {
 
             initMessagePage();
@@ -821,6 +829,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //            previosuPage = currentPage;
 //            currentPage = 1;
 //            pageStack.add(currentPage);
+        }
+        else {
+            mWebView.loadUrl("http://vorder.net/demo/advertising_list.php");
+            backupRequestParameter = new ArrayList<HashMap<String,String>>();
+            scanLeDevice(true);
         }
 
     }
@@ -957,7 +970,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     Must hold ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission to get results.
      */
     private void scanLeDevice(final boolean enable) {
-        Log.println(Log.INFO, targetID, "scanLeDevice");
+        Log.println(Log.INFO, targetID, "BLE scanLeDevice");
 //        tools.appendLog("scanLeDevice");
         if (enable  && !mScanning) {
             title.setVisibility(View.GONE);
@@ -1081,7 +1094,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //                            Log.println(Log.INFO, targetID, "asyncResult Data : " + asyncResult);
 //                            HashMap<String, String> asyncResult2JSON = tools.jsonObjectConvertToHashMap(asyncResult);
 
-
+                                Log.println(Log.INFO, targetID, "BLE Send Post");
                                 mWebView.loadUrl("javascript: display(" + postResult + ");");
                             }
 //                            backupRequestParameter = new ArrayList<HashMap<String,String>>();
@@ -1131,6 +1144,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
+            Log.println(Log.INFO, targetID, "BLE scanCallback");
 
             String uuid = "468e";
             String resultString = result.toString();
@@ -2129,7 +2143,9 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                     case 0:
                         inquireClick(tempView);
                         break;
-
+                    case 1:
+                        initPriceSearchPage();
+                        break;
                 }
             }
         });
@@ -2137,6 +2153,44 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
 
     }
+
+
+    public void initPriceSearchPage() {
+        setContentView(R.layout.price_search_page);
+
+//        android.view.ViewGroup.LayoutParams params;
+        android.view.ViewGroup.MarginLayoutParams mParams;
+
+        LinearLayout inquireLL = (LinearLayout) findViewById(R.id.inquire_ll);
+        mParams = (ViewGroup.MarginLayoutParams) inquireLL.getLayoutParams();
+        mParams.setMargins(0, (int) hPixels / 10, 0, hPixels / 10);
+
+        clearTopButtonBackground();
+        toolsBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+        toolsTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+
+        ViewGroup scanArea = (ViewGroup) findViewById(R.id.scanArea);
+
+        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
+//            setContentView(mScannerView);
+
+        mScannerView.setAutoFocus(true);
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();         // Start camera
+
+        scanArea.addView(mScannerView);
+
+        mWebView = (WebView) findViewById(R.id.priceWebView);
+        mWebView.loadUrl("http://vorder.net/demo/ol.php?pb=4710088471444");
+
+        timerOn = false;
+        mBluetoothLeScanner.stopScan(scanCallback);
+        mScanning = false;
+//        doWebView = false;
+        doPriceSearch = true;
+    }
+
 
 
 
