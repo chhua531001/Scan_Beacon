@@ -363,7 +363,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                 scanLeDevice(true);
             }
             else {
-                Log.println(Log.INFO, targetID, "Count Timer Stop");
+                Log.println(Log.INFO, targetID, "BLE Count Timer Stop");
             }
         }
     };
@@ -2097,6 +2097,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
         scanArea.addView(mScannerView);
 
+        timerOn = false;
+        mBluetoothLeScanner.stopScan(scanCallback);
+        mScanning = false;
+
 
 //        timerOn = false;
 //        mBluetoothLeScanner.stopScan(scanCallback);
@@ -2150,6 +2154,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
+        timerOn = false;
+        mBluetoothLeScanner.stopScan(scanCallback);
+        mScanning = false;
+
 
 
     }
@@ -2190,7 +2198,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //        doWebView = false;
         doPriceSearch = true;
     }
-
 
 
 
