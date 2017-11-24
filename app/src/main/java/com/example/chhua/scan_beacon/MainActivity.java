@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     int previosuPage = 1;
     int currentPage = 1;
 
-    boolean timerOn = true;
+//    boolean timerOn = true;
     boolean deviceReady = false;
     boolean firstTime = true;
 
@@ -357,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             // TODO Auto-generated method stub
             // 需要背景作的事
 
-            if (timerOn) {
+            if (currentPage == 1) {
                 Log.println(Log.INFO, targetID, "BLE Count Timer");
                 mHandler.postDelayed(rescanRunnable, RESCAN_PERIOD);
                 scanLeDevice(true);
@@ -508,7 +508,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         Log.println(Log.INFO, targetID, "System onfirstTime = "+firstTime);
         if(deviceReady && firstTime) {
             firstTime = false;
-            Log.println(Log.INFO, targetID, "System onfirstTime = ");
+            Log.println(Log.INFO, targetID, "BLE System onfirstTime = ");
 
             initMessagePage();
 
@@ -824,7 +824,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //            messageTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
 //
 //
-//            timerOn = true;
+////            timerOn = true;
 //            mHandler.post(rescanRunnable);
 //            previosuPage = currentPage;
 //            currentPage = 1;
@@ -860,7 +860,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //            scanArea.addView(mScannerView);
 //
 //
-//            timerOn = false;
+////            timerOn = false;
 //            mBluetoothLeScanner.stopScan(scanCallback);
 //            mScanning = false;
             initInquirePage();
@@ -2030,7 +2030,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //        idParameter = new ArrayList<HashMap<String,String>>();
 //        backupIDParameter = new ArrayList<HashMap<String,String>>();
 
-        timerOn = true;
+//        timerOn = true;
         mHandler.post(rescanRunnable);
 
 //            tools.appendLog("Scan BLE Device");
@@ -2064,7 +2064,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         scanArea.addView(mScannerView);
 
 
-        timerOn = false;
+//        timerOn = false;
         mBluetoothLeScanner.stopScan(scanCallback);
         mScanning = false;
 //        doWebView = false;
@@ -2097,12 +2097,12 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
         scanArea.addView(mScannerView);
 
-        timerOn = false;
+//        timerOn = false;
         mBluetoothLeScanner.stopScan(scanCallback);
         mScanning = false;
 
 
-//        timerOn = false;
+// //       timerOn = false;
 //        mBluetoothLeScanner.stopScan(scanCallback);
 //        mScanning = false;
 //        doWebView = false;
@@ -2154,7 +2154,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
-        timerOn = false;
+//        timerOn = false;
         mBluetoothLeScanner.stopScan(scanCallback);
         mScanning = false;
 
@@ -2192,7 +2192,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         mWebView = (WebView) findViewById(R.id.priceWebView);
         mWebView.loadUrl("http://vorder.net/demo/ol.php?pb=4710088471444");
 
-        timerOn = false;
+//        timerOn = false;
         mBluetoothLeScanner.stopScan(scanCallback);
         mScanning = false;
 //        doWebView = false;
