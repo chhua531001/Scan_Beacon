@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             logFile.delete();
         }
 
-        String newstr = "http://Word#$#$% .Word 1234".replaceAll("[^A-Za-z0-9//.:]+", "");
-        Log.println(Log.DEBUG, targetID, "newstr --> "+newstr);
+//        String newstr = "http://Word#$#$% .Word 1234".replaceAll("[^A-Za-z0-9//.:]+", "");
+//        Log.println(Log.DEBUG, targetID, "newstr --> "+newstr);
 
         tempPixels = tools.getDisplayParameter(getApplicationContext());
         hPixels = tempPixels.second;
@@ -198,9 +198,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         LinearLayout amLL = (LinearLayout) findViewById(R.id.am_ll);
         mParams = (ViewGroup.MarginLayoutParams) amLL.getLayoutParams();
         mParams.setMargins(0, (int) hPixels / 10, 0, 0);
-
-
-
 
         clearTopButtonBackground();
 
