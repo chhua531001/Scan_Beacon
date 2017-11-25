@@ -129,7 +129,9 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     ImageButton messageBtn, inquireBtn, toolsBtn, settingBtn;
     TextView messageTxt, inquireTxt, toolsTxt, settingTxt;
     ImageButton detailBtn, commodityBtn, shelfBtn, storeBtn;
+    ImageButton plusBtn, minusBtn, listBtn, clearBtn;
     TextView detailTxt, commodityTxt, shelfTxt, storeTxt;
+    TextView plusTxt, minusTxt, listTxt, clearTxt;
 
     boolean btn4Scanner = true;
     private ZXingScannerView mScannerView = null;
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             "cat", "flower", "hippo", "monkey", "mushroom", "panda", "rabbit", "raccoon"
     };
 
-    boolean doPriceSearch = false;
+//    boolean doPriceSearch = false;
 
 
     @Override
@@ -720,18 +722,20 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //        mScannerView.stopCamera();
 //        mScannerView = null;
 
-        if(!doPriceSearch) {
-            String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
-            Pattern p = Pattern.compile(URL_REGEX);
-            Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
-            if (m.find()) {
-                System.out.println("String contains URL");
-                doWebView(rawResult.getText().toString());
-            } else {
+        boolean errorCode = false;
+        switch(currentPage) {
+            case 2:
+                String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
+                Pattern p = Pattern.compile(URL_REGEX);
+                Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
+                if (m.find()) {
+                    System.out.println("String contains URL");
+                    doWebView(rawResult.getText().toString());
+                } else {
 
-                boolean errorCode = true;
+                    errorCode = true;
 //            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
-                if (rawResult.getText().toString().length() < 21) {
+                    if (rawResult.getText().toString().length() < 21) {
 //                for(String barCode : barCodeArray) {
 //                    if(barCode.equals(rawResult.getText().toString())) {
 //                        URL_REGEX = "^[A-Za-z0-9-]";
@@ -745,31 +749,96 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 //                        }
 //                    }
 //                }
-                    URL_REGEX = "^[A-Za-z0-9-]";
-                    p = Pattern.compile(URL_REGEX);
-                    m = p.matcher(rawResult.getText().toString());//replace with string to compare
-                    if (m.find()) {
-                        System.out.println("String contains Barcode");
-                        String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
-                        doWebView(pdUrl);
-                        errorCode = false;
+                        URL_REGEX = "^[A-Za-z0-9-]";
+                        p = Pattern.compile(URL_REGEX);
+                        m = p.matcher(rawResult.getText().toString());//replace with string to compare
+                        if (m.find()) {
+                            System.out.println("String contains Barcode");
+                            String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
+                            doWebView(pdUrl);
+                            errorCode = false;
+                        }
+
                     }
-
                 }
-
-                if (errorCode) {
-                    tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
-                    mScannerView.setAutoFocus(true);
-                    mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-                    mScannerView.startCamera();
+                break;
+            case 3:
+                URL_REGEX = "^[A-Za-z0-9-]";
+                p = Pattern.compile(URL_REGEX);
+                m = p.matcher(rawResult.getText().toString());//replace with string to compare
+                if (m.find()) {
+                    System.out.println("String contains Barcode");
+                    String priceUrl = "http://vorder.net/demo/ol.php?pb=" + rawResult.getText().toString();
+                    doPriceWebView(priceUrl);
                 }
-            }
+                else {
+                    errorCode = true;
+                }
+                break;
+
         }
-        else {
+
+        if (errorCode) {
+            tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
             mScannerView.setAutoFocus(true);
             mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
             mScannerView.startCamera();
         }
+
+
+
+//        if(!doPriceSearch) {
+//            String URL_REGEX = "^((http?)://)[vorder]+(\\.[net]+)+([/?].*)?$";
+//            Pattern p = Pattern.compile(URL_REGEX);
+//            Matcher m = p.matcher(rawResult.getText().toString());//replace with string to compare
+//            if (m.find()) {
+//                System.out.println("String contains URL");
+//                doWebView(rawResult.getText().toString());
+//            } else {
+//
+//                boolean errorCode = true;
+////            URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
+//                if (rawResult.getText().toString().length() < 21) {
+////                for(String barCode : barCodeArray) {
+////                    if(barCode.equals(rawResult.getText().toString())) {
+////                        URL_REGEX = "^[A-Za-z0-9-]";
+////                        p = Pattern.compile(URL_REGEX);
+////                        m = p.matcher(rawResult.getText().toString());//replace with string to compare
+////                        if (m.find()) {
+////                            System.out.println("String contains Barcode");
+////                            String pdUrl = "http://vorder.net/demo/cq.php?pb="+rawResult.getText().toString();
+////                            doWebView(pdUrl);
+////                            errorCode = false;
+////                        }
+////                    }
+////                }
+//                    URL_REGEX = "^[A-Za-z0-9-]";
+//                    p = Pattern.compile(URL_REGEX);
+//                    m = p.matcher(rawResult.getText().toString());//replace with string to compare
+//                    if (m.find()) {
+//                        System.out.println("String contains Barcode");
+//                        String pdUrl = "http://vorder.net/demo/cq.php?pb=" + rawResult.getText().toString();
+//                        doWebView(pdUrl);
+//                        errorCode = false;
+//                    }
+//
+//                }
+//
+//                if (errorCode) {
+//                    tools.toastNow(mContext, "QR-Code或是Bar-Code的資料不是正確的網址", Color.WHITE);
+//                    mScannerView.setAutoFocus(true);
+//                    mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+//                    mScannerView.startCamera();
+//                }
+//            }
+//        }
+//        else {
+////            mScannerView.setAutoFocus(true);
+////            mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+////            mScannerView.startCamera();
+//            String priceUrl = "http://vorder.net/demo/ol.php?pb=" + rawResult.getText().toString();
+//            doPriceWebView(priceUrl);
+//        }
 
 
 
@@ -948,7 +1017,45 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     }
 
+    public void plusClick(View v) {
+        Log.println(Log.INFO, targetID, "Plus Button Click");
 
+        if(subFunction != 1) {
+            initPriceSearchPage();
+        }
+
+//        clearAllButtonBackground();
+//        storeBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+//        storeTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+    }
+
+    public void minusClick(View v) {
+        Log.println(Log.INFO, targetID, "Minus Button Click");
+
+//        clearAllButtonBackground();
+//        storeBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+//        storeTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+    }
+
+    public void listClick(View v) {
+        Log.println(Log.INFO, targetID, "List Button Click");
+
+//        clearAllButtonBackground();
+//        storeBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+//        storeTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+    }
+
+    public void clearClick(View v) {
+        Log.println(Log.INFO, targetID, "Clear Button Click");
+
+//        clearAllButtonBackground();
+//        storeBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+//        storeTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+    }
 
 
     private void getBluetoothAdapterAndLeScanner(){
@@ -1947,6 +2054,94 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         storeTxt.setTextSize(textSizeDP);
     }
 
+    public void clearAllButton1Background() {
+
+        messageBtn = (ImageButton) findViewById(R.id.messageButton);
+        messageBtn.setBackgroundColor(0);
+        inquireBtn = (ImageButton) findViewById(R.id.inquireButton);
+        inquireBtn.setBackgroundColor(0);
+        toolsBtn = (ImageButton) findViewById(R.id.toolsButton);
+        toolsBtn.setBackgroundColor(0);
+        settingBtn = (ImageButton) findViewById(R.id.settingButton);
+        settingBtn.setBackgroundColor(0);
+
+        plusBtn = (ImageButton) findViewById(R.id.plusButton);
+        plusBtn.setBackgroundColor(0);
+        minusBtn = (ImageButton) findViewById(R.id.minusButton);
+        minusBtn.setBackgroundColor(0);
+        listBtn = (ImageButton) findViewById(R.id.listButton);
+        listBtn.setBackgroundColor(0);
+        clearBtn = (ImageButton) findViewById(R.id.clearButton);
+        clearBtn.setBackgroundColor(0);
+
+        android.view.ViewGroup.LayoutParams params;
+//        android.view.ViewGroup.MarginLayoutParams mParams;
+
+        //Layout的數值必須用Pixel來作為單位
+        ConstraintLayout topCL = (ConstraintLayout) findViewById(R.id.top_cl);
+        params = topCL.getLayoutParams();
+//        params.width = wPixels / 2;
+        params.height = hPixels / 10;
+        topCL.setLayoutParams(params);
+
+        ConstraintLayout bottomCL = (ConstraintLayout) findViewById(R.id.bottom_cl);
+        params = bottomCL.getLayoutParams();
+//        params.width = wPixels / 2;
+        params.height = hPixels / 10;
+        bottomCL.setLayoutParams(params);
+
+        LinearLayout topLL = (LinearLayout) findViewById(R.id.top_ll);
+        params = topLL.getLayoutParams();
+//        params.width = wPixels / 2;
+        params.height = hPixels / 10;
+        topLL.setLayoutParams(params);
+
+        LinearLayout bottomLL = (LinearLayout) findViewById(R.id.bottom_ll);
+        params = bottomLL.getLayoutParams();
+//        params.width = wPixels / 2;
+        params.height = hPixels / 10;
+        bottomLL.setLayoutParams(params);
+
+//        LinearLayout amLL = (LinearLayout) findViewById(R.id.am_ll);
+//        mParams = (ViewGroup.MarginLayoutParams) amLL.getLayoutParams();
+//        mParams.setMargins(0, (int) hPixels / 10, 0, 0);
+
+        //textSize必須用dp的數值來作為單位
+        float textSize = (float) (hPixels / 50);
+        Log.println(Log.DEBUG, targetID, "textSize_pixels --> "+textSize);
+        float textSizeDP = tools.convertPixelToDp(textSize, mContext);
+        Log.println(Log.DEBUG, targetID, "textSize_dps --> "+textSizeDP);
+
+        messageTxt = (TextView) findViewById(R.id.messageText);
+        messageTxt.setTextSize(textSizeDP);
+
+        messageTxt = (TextView) findViewById(R.id.messageText);
+        messageTxt.setBackgroundColor(0);
+        messageTxt.setTextSize(textSizeDP);
+        inquireTxt = (TextView) findViewById(R.id.inquireText);
+        inquireTxt.setBackgroundColor(0);
+        inquireTxt.setTextSize(textSizeDP);
+        toolsTxt = (TextView) findViewById(R.id.toolsText);
+        toolsTxt.setBackgroundColor(0);
+        toolsTxt.setTextSize(textSizeDP);
+        settingTxt = (TextView) findViewById(R.id.settingText);
+        settingTxt.setBackgroundColor(0);
+        settingTxt.setTextSize(textSizeDP);
+
+        plusTxt = (TextView) findViewById(R.id.plusText);
+        plusTxt.setBackgroundColor(0);
+        plusTxt.setTextSize(textSizeDP);
+        minusTxt = (TextView) findViewById(R.id.minusText);
+        minusTxt.setBackgroundColor(0);
+        minusTxt.setTextSize(textSizeDP);
+        listTxt = (TextView) findViewById(R.id.listText);
+        listTxt.setBackgroundColor(0);
+        listTxt.setTextSize(textSizeDP);
+        clearTxt = (TextView) findViewById(R.id.clearText);
+        clearTxt.setBackgroundColor(0);
+        clearTxt.setTextSize(textSizeDP);
+    }
+
     public void doWebView(String url) {
 
         Log.println(Log.INFO, targetID, "doWebView");
@@ -1966,6 +2161,49 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         clearAllButtonBackground();
         inquireBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
         inquireTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+
+//        WebView mWebView = (WebView) findViewById(R.id.webview1);
+        mWebView.setBackgroundColor(ContextCompat.getColor(this, R.color.webColor));
+//        mWebView.setBackgroundColor(Color.parseColor("#d9f1d8"));
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(mWebViewClient);
+        mWebView.setWebChromeClient(new WebChromeClient());
+
+        mWebView.loadUrl(url);
+
+        subFunction = 5;
+
+//        doWebView = true;
+//        mWebView.loadUrl("http://www.google.com.tw");
+//        mWebView.loadUrl("https://goo.gl/TktWSt");
+//        mWebView.loadUrl("https://www.facebook.com");
+//        mWebView.loadUrl("https://www.google.com/");
+
+//        mWebView.reload();
+//        Button previousButton  = (Button) xxx.findViewById(R.id.previousButton);
+
+
+    }
+
+    public void doPriceWebView(String url) {
+
+        Log.println(Log.INFO, targetID, "doWebView");
+//        Log.e("handler", url); // Prints scan results
+        Log.println(Log.DEBUG, targetID, "URL->"+url);
+
+        setContentView(R.layout.price_webview_page);
+
+
+//        android.view.ViewGroup.LayoutParams params;
+        android.view.ViewGroup.MarginLayoutParams mParams;
+
+        mWebView = (WebView) findViewById(R.id.webview1);
+        mParams = (ViewGroup.MarginLayoutParams) mWebView.getLayoutParams();
+        mParams.setMargins(0, (int) hPixels / 10, 0, hPixels / 10);
+
+        clearAllButton1Background();
+        toolsBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
+        toolsTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
 
 //        WebView mWebView = (WebView) findViewById(R.id.webview1);
         mWebView.setBackgroundColor(ContextCompat.getColor(this, R.color.webColor));
@@ -2161,7 +2399,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
 
     public void initPriceSearchPage() {
-        setContentView(R.layout.price_search_page);
+        setContentView(R.layout.price_search_page1);
 
 //        android.view.ViewGroup.LayoutParams params;
         android.view.ViewGroup.MarginLayoutParams mParams;
@@ -2170,7 +2408,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         mParams = (ViewGroup.MarginLayoutParams) inquireLL.getLayoutParams();
         mParams.setMargins(0, (int) hPixels / 10, 0, hPixels / 10);
 
-        clearTopButtonBackground();
+        clearAllButton1Background();
         toolsBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
         toolsTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
 
@@ -2186,14 +2424,15 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
         scanArea.addView(mScannerView);
 
-        mWebView = (WebView) findViewById(R.id.priceWebView);
-        mWebView.loadUrl("http://vorder.net/demo/ol.php?pb=4710088471444");
+//        mWebView = (WebView) findViewById(R.id.priceWebView);
+//        mWebView.loadUrl("http://vorder.net/demo/ol.php?pb=4710088471444");
 
 //        timerOn = false;
         mBluetoothLeScanner.stopScan(scanCallback);
         mScanning = false;
 //        doWebView = false;
-        doPriceSearch = true;
+//        doPriceSearch = true;
+        subFunction = 1;
     }
 
 
