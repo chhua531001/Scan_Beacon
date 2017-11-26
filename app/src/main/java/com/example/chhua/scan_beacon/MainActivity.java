@@ -2285,8 +2285,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         clearAllButtonBackground();
         inquireBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
         inquireTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
-        detailBtn.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
-        detailTxt.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
+        detailBtn.setBackgroundColor(getResources().getColor(R.color.lavender));
+        detailTxt.setBackgroundColor(getResources().getColor(R.color.lavender));
 
 
         ViewGroup scanArea = (ViewGroup) findViewById(R.id.scanArea);
@@ -2321,8 +2321,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         clearAllButtonBackground();
         inquireBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
         inquireTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
-        commodityBtn.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
-        commodityTxt.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
+        commodityBtn.setBackgroundColor(getResources().getColor(R.color.lavender));
+        commodityTxt.setBackgroundColor(getResources().getColor(R.color.lavender));
 
 
         ViewGroup scanArea = (ViewGroup) findViewById(R.id.scanArea);
@@ -2415,8 +2415,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         clearAllButton1Background();
         toolsBtn.setBackgroundColor(getResources().getColor(R.color.deepPurple));
         toolsTxt.setBackgroundColor(getResources().getColor(R.color.deepPurple));
-        plusBtn.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
-        plusTxt.setBackgroundColor(getResources().getColor(R.color.lemonchiffon));
+        plusBtn.setBackgroundColor(getResources().getColor(R.color.lavender));
+        plusTxt.setBackgroundColor(getResources().getColor(R.color.lavender));
 
         ViewGroup scanArea = (ViewGroup) findViewById(R.id.scanArea);
 
